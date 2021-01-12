@@ -3,7 +3,7 @@ say_status :content_security_policy, "Installing the bridgetown-content-security
 add_bridgetown_plugin "bridgetown-content-security-policy"
 
 create_file "content_security_policy.config.rb" do
-  <<~STRING
+  <<~RUBY
   # The recommended default Content Security Policy 
 
   BridgetownContentSecurityPolicy.configure :default do |policy|
@@ -33,7 +33,7 @@ create_file "content_security_policy.config.rb" do
   #     policy.script_src  :self, :https
   #     policy.style_src   :self, :https
   # end
-  STRING
+  RUBY
 end
 
 say_status :content_security_policy, "All done! Please add {% content_security_policy %} to the head tag in your layouts."
