@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.version       = BridgetownContentSecurityPolicy::VERSION
   spec.author        = "Ayush Newatia"
   spec.email         = "ayush@hey.com"
-  spec.summary       = "Add a content security policy to your website using Ruby"
+  spec.summary       = "Add a content security policy to your website using a convenient Ruby DSL"
   spec.homepage      = "https://github.com/ayushn21/bridgetown-content-security-policy"
   spec.license       = "MIT"
 
