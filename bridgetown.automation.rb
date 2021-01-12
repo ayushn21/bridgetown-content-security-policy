@@ -34,6 +34,7 @@ create_file "content_security_policy.config.rb" do
   #     policy.style_src   :self, :https
   # end
   STRING
+end
 
 say_status :content_security_policy, "All done! Please add {% content_security_policy %} to the head tag in your layouts."
 say_status :content_security_policy, "Please see the new content_security_policy.rb file for details"
