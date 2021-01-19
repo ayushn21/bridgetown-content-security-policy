@@ -16,11 +16,19 @@ The plugin allows you to define one or more Content Security Policies using a co
 
 The installation should create a `content_security_policy.config.rb` file in your project root. More info about the DSL is contained in the file.
 
-Add `{% content_security_policy %}` in the `head` tag of *your layout file* to include the CSP on all your pages.
-
-You can also define a specific CSP for pages by setting `content_security_policy:` in your frontmatter; and then defining the relevent CSP in `content_security_policy.config.rb`.
+You can define a specific CSP for pages by setting `content_security_policy:` in your frontmatter; and then defining the relevent CSP in `content_security_policy.config.rb`.
 
 All page specific CSPs will inherit from the `default` CSP.
+
+### Including the CSP on your web pages
+
+You'll need to add a `content_security_policy` tag to your **layout file(s)** to include the CSP meta tag in all your pages. This plugin supports *Liquid*, *ERB* and other Tilt based templating languages like *HAML* or *Slim*.
+
+- **Liquid templates**: `{% content_security_policy %}`
+- **ERB**: `<%= content_security_policy %>`
+
+Add the appropriate CSP tag in the `head` tag of **_your layout file_** to include the CSP on all your pages.
+
 
 ## Testing
 
