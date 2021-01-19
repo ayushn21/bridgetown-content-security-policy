@@ -1,24 +1,39 @@
 require "helper"
 
 class TestContentSecurityPolicy < BridgetownContentSecurityPolicy::Test
-    
+
+  DEFAULT_CSP = "default-src 'self'; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src 'self' https:; style-src 'self' https:"
+  ALLOW_HTTPS_CSP = "default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src 'self' https:; style-src 'self' https:"
+
   should "generate CSP for index as defined in the default policy" do
-    expected_csp = "default-src 'self'; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src 'self' https:; style-src 'self' https:"
-    page = Nokogiri::HTML File.read(dest_dir("index.html"))
-    
-    generated_csp = extract_content_security_policy page
-    assert_equal expected_csp, generated_csp
+    @page = Nokogiri::HTML File.read(dest_dir("index.html"))
+
+    assert_equal DEFAULT_CSP, generated_csp
   end
-  
+
   should "generate CSP for about as overriden in allow_https policy" do
-    expected_csp = "default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src 'self' https:; style-src 'self' https:"
-    page = Nokogiri::HTML File.read(dest_dir("about.html"))
-    
-    generated_csp = extract_content_security_policy page
-    assert_equal expected_csp, generated_csp
+    @page = Nokogiri::HTML File.read(dest_dir("about.html"))
+
+    assert_equal ALLOW_HTTPS_CSP, generated_csp
   end
-  
+
+  should "generate default CSP in an ERB layout" do
+    @page = Nokogiri::HTML File.read(dest_dir("products", "telecaster.html"))
+
+    assert_equal DEFAULT_CSP, generated_csp
+  end
+
+  should "generate overriden CSP in an ERB layout" do
+    @page = Nokogiri::HTML File.read(dest_dir("products", "stratocaster.html"))
+
+    assert_equal ALLOW_HTTPS_CSP, generated_csp
+  end
+
   private
+    def generated_csp
+      extract_content_security_policy @page
+    end
+
     def extract_content_security_policy(html_page)
       html_page.at_css("meta[http-equiv=Content-Security-Policy]").attributes["content"].value
     end
