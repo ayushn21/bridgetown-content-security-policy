@@ -18,15 +18,25 @@ module BridgetownContentSecurityPolicy
         # rubocop:enable Layout/LineLength
       end
 
-      liquid_tag "content_security_policy", :render
+      liquid_tag "content_security_policy" do |_attributes, tag|
+        render tag.context["page"]["content_security_policy"]
+      end
+
+      helper "_csp" do |policy_name|
+        render policy_name
+      end
+
+      helper "content_security_policy", helpers_scope: true do
+        _csp view.page.data.content_security_policy
+      end
     end
 
     private
 
-    def render(_attributes, tag)
+    def render(policy_name = nil)
       return "" unless default_policy
 
-      page_specific_policy_name = tag.context["page"]["content_security_policy"]&.to_sym
+      page_specific_policy_name = policy_name&.to_sym
       page_specific_policy = BridgetownContentSecurityPolicy.policies[page_specific_policy_name]
 
       if page_specific_policy_name && page_specific_policy.nil?
@@ -35,10 +45,10 @@ module BridgetownContentSecurityPolicy
 
       policy = default_policy.merge(page_specific_policy)
 
-      render_policy policy
+      markup_for_policy policy
     end
 
-    def render_policy(policy)
+    def markup_for_policy(policy)
       "<meta http-equiv=\"Content-Security-Policy\" content=\"#{policy.build}\">"
     end
 
