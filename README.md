@@ -14,7 +14,7 @@ $ bundle exec bridgetown apply https://github.com/ayushn21/bridgetown-content-se
 
 The plugin allows you to define one or more Content Security Policies using a convenient Ruby DSL.
 
-The installation should create a `content_security_policy.config.rb` file in your project root. More info about the DSL is contained in the file.
+The installation should create a `content_security_policy.config.rb` file in your project's `config` directory. More info about the DSL is contained in the file.
 
 You can define a specific CSP for pages by setting `content_security_policy:` in your frontmatter; and then defining the relevent CSP in `content_security_policy.config.rb`.
 

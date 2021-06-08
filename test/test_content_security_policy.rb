@@ -1,4 +1,5 @@
 require "helper"
+require "byebug"
 
 class TestContentSecurityPolicy < BridgetownContentSecurityPolicy::Test
 

@@ -2,7 +2,7 @@ say_status :content_security_policy, "Installing the bridgetown-content-security
 
 add_bridgetown_plugin "bridgetown-content-security-policy"
 
-create_file "content_security_policy.config.rb" do
+create_file "config/content_security_policy.config.rb" do
   <<~RUBY
   # The recommended default Content Security Policy
 
