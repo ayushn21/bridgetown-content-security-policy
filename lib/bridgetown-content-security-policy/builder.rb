@@ -9,7 +9,7 @@ module BridgetownContentSecurityPolicy
 
   class Builder < Bridgetown::Builder
     def build
-      require_relative site.in_root_dir("content_security_policy.config.rb")
+      require_relative site.in_root_dir("config", "content_security_policy.config.rb")
 
       unless default_policy
         # rubocop:disable Layout/LineLength
@@ -49,7 +49,7 @@ module BridgetownContentSecurityPolicy
     end
 
     def markup_for_policy(policy)
-      "<meta http-equiv=\"Content-Security-Policy\" content=\"#{policy.build}\">"
+      "<meta http-equiv=\"Content-Security-Policy\" content=\"#{policy.build}\">".html_safe
     end
 
     def default_policy
