@@ -43,3 +43,9 @@ Add the appropriate CSP tag in the `head` tag of **_your layout file_** to inclu
 4. Commit your changes (`git commit -am 'Add some feature'`)
 5. Push to the branch (`git push origin my-new-feature`)
 6. Create a new Pull Request
+
+## License
+
+Bridgetown Content Security Policy is released under the [MIT License](https://opensource.org/licenses/MIT).
+
+Copyright © 2021 [Ayush Newatia](https://twitter.com/ayushn21)
