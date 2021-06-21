@@ -1,5 +1,8 @@
 # Bridgetown Content Security Policy
 
+[![Tests](https://github.com/ayushn21/bridgetown-content-security-policy/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/ayushn21/bridgetown-content-security-policy/actions/workflows/tests.yml)
+[![Gem Version](https://badge.fury.io/rb/bridgetown-content-security-policy.svg)](https://badge.fury.io/rb/bridgetown-content-security-policy)
+
 A Bridgetown plugin to include a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) as a meta tag on all your pages.
 
 ## Installation
