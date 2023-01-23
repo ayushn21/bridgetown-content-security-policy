@@ -1,5 +1,11 @@
 # main
 
+# 1.2.0 / 23-01-2023
+
+* Require Bridgetown 1.0 or newer.
+* Require Ruby 2.7 or newer.
+* Remove BrowserSync permission as Bridgetown no longer uses it.
+
 # 1.1.0 / 08-06-2021
 
 * Change location of CSP config file to `config/`.
