@@ -16,19 +16,19 @@ class TestContentSecurityPolicy < BridgetownContentSecurityPolicy::Test
     end
 
     should "generate CSP for about as overriden in allow_https policy" do
-      @page = Nokogiri::HTML File.read(dest_dir("about.html"))
+      @page = Nokogiri::HTML File.read(dest_dir("about/index.html"))
 
       assert_equal ALLOW_HTTPS_CSP, generated_csp
     end
 
     should "generate default CSP in an ERB layout" do
-      @page = Nokogiri::HTML File.read(dest_dir("products", "telecaster.html"))
+      @page = Nokogiri::HTML File.read(dest_dir("products", "telecaster/index.html"))
 
       assert_equal DEFAULT_CSP, generated_csp
     end
 
     should "generate overriden CSP in an ERB layout" do
-      @page = Nokogiri::HTML File.read(dest_dir("products", "stratocaster.html"))
+      @page = Nokogiri::HTML File.read(dest_dir("products", "stratocaster/index.html"))
 
       assert_equal ALLOW_HTTPS_CSP, generated_csp
     end
