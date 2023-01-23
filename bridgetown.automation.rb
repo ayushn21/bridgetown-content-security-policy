@@ -10,9 +10,6 @@ create_file "config/content_security_policy.config.rb" do
       policy.default_src :self
       policy.img_src     :self, :data
       policy.object_src  :none
-
-      # Allow BrowserSync in development
-      policy.script_src  :self, :unsafe_inline if Bridgetown.environment.development?
   end
 
   # All other policies with inherit from :default
