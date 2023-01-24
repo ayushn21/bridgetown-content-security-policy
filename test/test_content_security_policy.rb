@@ -1,33 +1,43 @@
 require "helper"
-require "byebug"
 
 class TestContentSecurityPolicy < BridgetownContentSecurityPolicy::Test
 
   DEFAULT_CSP = "default-src 'self'; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src 'self' https:; style-src 'self' https:"
   ALLOW_HTTPS_CSP = "default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src 'self' https:; style-src 'self' https:"
 
-  context "building the site" do
-    setup { build_site }
+  def setup
+    @config = Bridgetown.configuration(
+      "full_rebuild"  => true,
+      "root_dir"      => root_dir,
+      "source"        => source_dir,
+      "destination"   => dest_dir,
+      "quiet"         => true
+    )
+    @config.run_initializers! context: :static
+    @site = Bridgetown::Site.new(@config)
+    @site.process
+  end
 
-    should "generate CSP for index as defined in the default policy" do
+  describe "building the site" do
+    it "generates CSP for index as defined in the default policy" do
       @page = Nokogiri::HTML File.read(dest_dir("index.html"))
 
       assert_equal DEFAULT_CSP, generated_csp
     end
 
-    should "generate CSP for about as overriden in allow_https policy" do
+    it "generates CSP for about as overriden in allow_https policy" do
       @page = Nokogiri::HTML File.read(dest_dir("about/index.html"))
 
       assert_equal ALLOW_HTTPS_CSP, generated_csp
     end
 
-    should "generate default CSP in an ERB layout" do
+    it "generates default CSP in an ERB layout" do
       @page = Nokogiri::HTML File.read(dest_dir("products", "telecaster/index.html"))
 
       assert_equal DEFAULT_CSP, generated_csp
     end
 
-    should "generate overriden CSP in an ERB layout" do
+    it "generate overriden CSP in an ERB layout" do
       @page = Nokogiri::HTML File.read(dest_dir("products", "stratocaster/index.html"))
 
       assert_equal ALLOW_HTTPS_CSP, generated_csp
