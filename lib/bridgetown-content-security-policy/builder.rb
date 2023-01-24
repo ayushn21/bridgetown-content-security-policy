@@ -22,12 +22,8 @@ module BridgetownContentSecurityPolicy
         render tag.context["page"]["content_security_policy"]
       end
 
-      helper "_csp" do |policy_name|
-        render policy_name
-      end
-
-      helper "content_security_policy", helpers_scope: true do
-        _csp view.page.data.content_security_policy
+      helper "content_security_policy" do
+        render helpers.view.page.data.content_security_policy
       end
     end
 
