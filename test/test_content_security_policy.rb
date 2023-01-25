@@ -6,6 +6,7 @@ class TestContentSecurityPolicy < BridgetownContentSecurityPolicy::Test
   ALLOW_HTTPS_CSP = "default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src 'self' https:; style-src 'self' https:"
 
   def setup
+    Bridgetown.reset_configuration!
     @config = Bridgetown.configuration(
       "full_rebuild"  => true,
       "root_dir"      => root_dir,
