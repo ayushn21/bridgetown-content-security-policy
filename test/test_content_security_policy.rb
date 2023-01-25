@@ -1,18 +1,21 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestContentSecurityPolicy < BridgetownContentSecurityPolicy::Test
-
+  # rubocop:disable Layout/LineLength
   DEFAULT_CSP = "default-src 'self'; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src 'self' https:; style-src 'self' https:"
   ALLOW_HTTPS_CSP = "default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src 'self' https:; style-src 'self' https:"
+  # rubocop:enable Layout/LineLength
 
   def setup
     Bridgetown.reset_configuration!
     @config = Bridgetown.configuration(
-      "full_rebuild"  => true,
-      "root_dir"      => root_dir,
-      "source"        => source_dir,
-      "destination"   => dest_dir,
-      "quiet"         => true
+      "full_rebuild" => true,
+      "root_dir"     => root_dir,
+      "source"       => source_dir,
+      "destination"  => dest_dir,
+      "quiet"        => true
     )
     @config.run_initializers! context: :static
     @site = Bridgetown::Site.new(@config)
@@ -46,6 +49,7 @@ class TestContentSecurityPolicy < BridgetownContentSecurityPolicy::Test
   end
 
   private
+
     def generated_csp
       extract_content_security_policy @page
     end

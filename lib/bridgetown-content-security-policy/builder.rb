@@ -12,10 +12,8 @@ module BridgetownContentSecurityPolicy
       require_relative site.in_root_dir("config", "content_security_policy.config.rb")
 
       unless default_policy
-        # rubocop:disable Layout/LineLength
         Bridgetown.logger.error "\nDefault Content Security Policy not configured"
         Bridgetown.logger.info "Please configure a default CSP in content_security_policy.config.rb\n"
-        # rubocop:enable Layout/LineLength
       end
 
       liquid_tag "content_security_policy" do |_attributes, tag|

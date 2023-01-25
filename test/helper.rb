@@ -37,6 +37,6 @@ class BridgetownContentSecurityPolicy::Test < Minitest::Test
   end
 
   def make_context(registers = {})
-    Liquid::Context.new({}, {}, { :site => site }.merge(registers))
+    Liquid::Context.new({}, {}, { site: site }.merge(registers))
   end
 end
