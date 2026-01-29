@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 module BridgetownContentSecurityPolicy
-  mattr_reader :policies, default: {}
+  @policies ||= {}
 
   def self.configure(name, &block)
-    @@policies[name.to_sym] = BridgetownContentSecurityPolicy::Policy.new(&block)
+    @policies[name.to_sym] = BridgetownContentSecurityPolicy::Policy.new(&block)
+  end
+
+  def self.policies
+    @policies || {}
   end
 
   class Builder < Bridgetown::Builder
